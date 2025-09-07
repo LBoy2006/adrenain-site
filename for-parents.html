@@ -32,11 +32,22 @@
         <span class="font-semibold text-lg tracking-tight text-gray-100 group-hover:text-white">Adrenalin Family</span>
       </a>
       <nav class="flex items-center gap-3">
-        <a href="./" class="px-4 py-2 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition">Главная</a>
-        <a href="https://t.me/Adrenalinfamilybot/app" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Приложение</a>
+        <a href="index.html" class="px-4 py-2 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition">Главная</a>
+        <a href="https://t.me/Adrenalinfamilybot" id="tg-return" class="hidden px-4 py-2 rounded-md text-gray-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition">Вернуться в приложение</a>
+        <a href="https://t.me/Adrenalinfamilybot" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Приложение</a>
       </nav>
     </div>
   </header>
+
+  <script>
+    (function() {
+      var isTelegram = /Telegram/i.test(navigator.userAgent) || (document.referrer || '').indexOf('t.me') !== -1 || (window.Telegram && window.Telegram.WebApp);
+      var el = document.getElementById('tg-return');
+      if (isTelegram && el) {
+        el.classList.remove('hidden');
+      }
+    })();
+  </script>
 
   <!-- Основной контент -->
   <main class="max-w-4xl mx-auto px-4 py-12">
@@ -97,16 +108,8 @@
               <span>600 энергии на старте</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-[var(--pink)] mt-1">✨</span>
-              <span>Бонусы: x2 + streak</span>
-            </li>
-            <li class="flex items-start gap-2">
               <span class="text-[var(--pink)] mt-1">🎲</span>
               <span>Доступ к общим розыгрышам</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-[var(--pink)] mt-1">⭐</span>
-              <span>Бейдж в профиле</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-[var(--pink)] mt-1">⚠️</span>
@@ -164,7 +167,7 @@
         </div>
         <div>
           <h3 class="text-lg font-semibold mb-2 text-[var(--pink)]">Отмена</h3>
-          <p>В любой момент в профиле внутри бота; доступ действует до конца оплаченного периода.</p>
+          <p>В любой момент в профиле внутри бота; <br>доступ действует до конца оплаченного периода.</p>
         </div>
         <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
           <p class="text-green-300 font-medium">✓ Скрытых платежей нет.</p>
@@ -323,24 +326,33 @@
   </main>
 
   <!-- Подвал -->
-  <footer class="bg-[#0b0f1a] text-gray-300 text-sm py-10 px-4 mt-16">
+  <footer class="bg-[#0b0f1a] text-gray-300 text-sm py-10 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-4 gap-8">
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <img src="assets/logo.webp" alt="Adrenalin Family" class="h-8 w-auto object-contain drop-shadow-sm">
             <span class="font-semibold">Adrenalin Family</span>
           </div>
         </div>
-        <div class="space-y-2">
+        <div class="space-y-2" id="contacts">
           <p class="text-gray-400">Контакты</p>
           <ul class="space-y-1">
             <li>Email: <a href="mailto:info@adrenalinfamily.ru" class="text-white hover:underline">info@adrenalinfamily.ru</a></li>
             <li>Сайт: <a href="https://adrenalinfamily.ru" class="text-white hover:underline">adrenalinfamily.ru</a></li>
-            <li>Telegram-бот: <a href="https://t.me/Adrenalinfamilybot/app" class="text-white hover:underline">t.me/Adrenalinfamilybot</a></li>
+            <li>Telegram-бот: <a href="https://t.me/Adrenalinfamilybot" class="text-white hover:underline">t.me/Adrenalinfamilybot</a></li>
           </ul>
         </div>
         <div class="space-y-2">
+          <p class="text-gray-400">Статьи</p>
+          <ul class="space-y-2">
+            <li><a href="how-it-works.html" class="text-[var(--cyan)] hover:text-white">Как это работает?</a></li>
+            <li><a href="pricing.html" class="text-[var(--cyan)] hover:text-white">Сколько стоит?</a></li>
+            <li><a href="for-parents.html" class="text-[var(--cyan)] hover:text-white">Для родителей</a></li>
+          </ul>
+        </div>
+        
+        <div id="footer-docs" class="space-y-2">
           <p class="text-gray-400">Документы</p>
           <ul class="space-y-2">
             <li><a href="docs/oferta.html" class="text-[var(--cyan)] hover:text-white">Договор оферты</a></li>
@@ -350,7 +362,12 @@
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-6 border-t border-white/10 text-center text-gray-400">© 2025 Adrenalin Family</div>
+      <div class="mt-8 pt-6 border-t border-white/10 text-center text-gray-400">Официально от Adrenalin House ©</div>
+      <div class="mt-1 pt-1 text-center text-gray-400"> 2025 Adrenalin Family ©</div>
+      <div class="mt-3 text-[11px] sm:text-xs text-gray-500 text-center space-y-1 max-w-5xl mx-auto px-4">
+        <p>ИП Евтушенко Богдан Сергеевич — ИНН 312331783978, ОГРНИП 325310000037590</p>
+        <p>Р/с 40802810200008289367 в АО «ТБанк», К/с 30101810145250000974, БИК 044525974</p>
+      </div>
     </div>
   </footer>
 

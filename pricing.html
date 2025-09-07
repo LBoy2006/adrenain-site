@@ -32,11 +32,22 @@
         <span class="font-semibold text-lg tracking-tight text-gray-100 group-hover:text-white">Adrenalin Family</span>
       </a>
       <nav class="flex items-center gap-3">
-        <a href="./" class="px-4 py-2 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition">Главная</a>
-        <a href="https://t.me/Adrenalinfamilybot/app" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Приложение</a>
+        <a href="index.html" class="px-4 py-2 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition">Главная</a>
+        <a href="https://t.me/Adrenalinfamilybot" id="tg-return" class="hidden px-4 py-2 rounded-md text-gray-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition">Вернуться в приложение</a>
+        <a href="https://t.me/Adrenalinfamilybot" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Приложение</a>
       </nav>
     </div>
   </header>
+
+  <script>
+    (function() {
+      var isTelegram = /Telegram/i.test(navigator.userAgent) || (document.referrer || '').indexOf('t.me') !== -1 || (window.Telegram && window.Telegram.WebApp);
+      var el = document.getElementById('tg-return');
+      if (isTelegram && el) {
+        el.classList.remove('hidden');
+      }
+    })();
+  </script>
 
   <!-- Основной контент -->
   <main class="max-w-4xl mx-auto px-4 py-12">
@@ -67,7 +78,8 @@
           <div class="text-center mb-6">
             <h3 class="text-2xl font-bold mb-2">👦 «Братик» — лёгкий вход</h3>
             <div class="text-4xl font-extrabold mb-2">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)]">1000 ₽ → 390 ₽ / мес</span>
+              <span class="text-gray-500 line-through text-2xl mr-2">1000 ₽ </span>→
+              <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)]">390 ₽ / мес</span>
             </div>
           </div>
           
@@ -76,7 +88,7 @@
           <ul class="space-y-3">
             <li class="flex items-start gap-3">
                 <span class="text-[var(--cyan)] mt-1">🎁</span>
-                <span>5–7 подарков в месяц</span>
+                <span>5 подарков в месяц</span>
               </li>
               <li class="flex items-start gap-3">
                 <span class="text-[var(--cyan)] mt-1">🔋</span>
@@ -88,16 +100,9 @@
             </li>
             <li class="flex items-start gap-3">
                 <span class="text-[var(--cyan)] mt-1">🎲</span>
-                <span>Розыгрыши айфонов (доступ ко всем общим розыгрышам)</span>
+                <span>Розыгрыши техники (доступ ко всем общим розыгрышам)</span>
             </li>
-            <li class="flex items-start gap-3">
-                <span class="text-[var(--cyan)] mt-1">✨</span>
-                <span>Бонусы: x2 + streak за регулярность</span>
-            </li>
-            <li class="flex items-start gap-3">
-                <span class="text-[var(--cyan)] mt-1">⭐</span>
-                <span>Бейдж в профиле</span>
-            </li>
+        
             <li class="flex items-start gap-3">
                 <span class="text-[var(--cyan)] mt-1">⚠️</span>
                 <span>Количество мест ограничено</span>
@@ -115,7 +120,8 @@
           <div class="text-center mb-6">
             <h3 class="text-2xl font-bold mb-2">🏆 «Легенда» — максимум преимуществ</h3>
             <div class="text-4xl font-extrabold mb-2">
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--cyan)] to-[var(--pink)]">2000 ₽ → 990 ₽ / мес</span>
+              <span class="text-gray-500 line-through text-2xl mr-2">2000 ₽</span>→
+              <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--cyan)] to-[var(--pink)]">990 ₽ / мес</span>
             </div>
           </div>
           
@@ -140,7 +146,7 @@
             </li>
             <li class="flex items-start gap-3">
                 <span class="text-[var(--pink)] mt-1">🎲</span>
-                <span>Розыгрыши айфонов (больше участий → выше шанс)</span>
+                <span>Розыгрыши техники (больше участий → выше шанс)</span>
             </li>
             <li class="flex items-start gap-3">
                 <span class="text-[var(--pink)] mt-1">⭐</span>
@@ -176,7 +182,7 @@
             </tr>
             <tr class="border-b border-white/5">
               <td class="py-3 px-4">Подарков в месяц</td>
-              <td class="py-3 px-4 text-center">5–7</td>
+              <td class="py-3 px-4 text-center">5</td>
               <td class="py-3 px-4 text-center">20+</td>
             </tr>
             <tr class="border-b border-white/5">
@@ -186,7 +192,7 @@
             </tr>
             <tr class="border-b border-white/5">
               <td class="py-3 px-4">Бонусы (x2 + streak)</td>
-              <td class="py-3 px-4 text-center">Да</td>
+              <td class="py-3 px-4 text-center">Нет</td>
               <td class="py-3 px-4 text-center">Да</td>
             </tr>
             <tr class="border-b border-white/5">
@@ -196,13 +202,13 @@
             </tr>
             <tr class="border-b border-white/5">
               <td class="py-3 px-4">Бейдж в профиле</td>
-              <td class="py-3 px-4 text-center">Да</td>
+              <td class="py-3 px-4 text-center">Нет</td>
               <td class="py-3 px-4 text-center">Да</td>
             </tr>
             <tr>
               <td class="py-3 px-4">Лимит мест</td>
               <td class="py-3 px-4 text-center">Есть</td>
-              <td class="py-3 px-4 text-center">Обычно без лимита</td>
+              <td class="py-3 px-4 text-center">Без лимита</td>
             </tr>
           </tbody>
         </table>
@@ -330,13 +336,13 @@
     <!-- Почему цена адекватна -->
     <div class="bg-[#12172a] rounded-2xl p-8 border border-white/10 mb-12">
       <h3 class="text-2xl font-bold mb-6 text-center">Почему цена адекватна</h3>
-      <p class="text-gray-300 text-lg leading-relaxed text-center">
+      <p class="text-gray-300 text-lg leading-relaxed text-left">
         За 390–990 ₽/мес пользователь получает: ежедневные активности, персональные цифровые подарки, участие в розыгрышах дорогой техники, ускорители прогресса и простую механику в рамках привычного Telegram. Для ядра аудитории это высокий value-for-money.
       </p>
     </div>
 
     <!-- Официальные ссылки -->
-    <div class="bg-gradient-to-br from-[var(--cyan)]/10 to-[var(--pink)]/10 rounded-2xl p-8 border border-[var(--cyan)]/20 mb-12">
+    <!-- <div class="bg-gradient-to-br from-[var(--cyan)]/10 to-[var(--pink)]/10 rounded-2xl p-8 border border-[var(--cyan)]/20 mb-12">
       <h3 class="text-2xl font-bold mb-6 text-center">Официальные ссылки</h3>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a href="https://t.me/AdrenalinFamilyBot" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-lg hover:shadow-xl transition text-lg font-semibold">
@@ -346,35 +352,44 @@
           Сайт: adrenalinfamily.ru
         </a>
       </div>
-    </div>
+    </div> -->
 
     <!-- Призыв к действию -->
-    <div class="text-center">
+    <!-- <div class="text-center">
       <a href="https://t.me/AdrenalinFamilyBot" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 rounded-lg text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-lg hover:shadow-xl transition text-lg font-semibold">
         Начать участие
       </a>
     </div>
-  </main>
+  </main> -->
 
   <!-- Подвал -->
-  <footer class="bg-[#0b0f1a] text-gray-300 text-sm py-10 px-4 mt-16">
+  <footer class="bg-[#0b0f1a] text-gray-300 text-sm py-10 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-4 gap-8">
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <img src="assets/logo.webp" alt="Adrenalin Family" class="h-8 w-auto object-contain drop-shadow-sm">
             <span class="font-semibold">Adrenalin Family</span>
           </div>
         </div>
-        <div class="space-y-2">
+        <div class="space-y-2" id="contacts">
           <p class="text-gray-400">Контакты</p>
           <ul class="space-y-1">
             <li>Email: <a href="mailto:info@adrenalinfamily.ru" class="text-white hover:underline">info@adrenalinfamily.ru</a></li>
             <li>Сайт: <a href="https://adrenalinfamily.ru" class="text-white hover:underline">adrenalinfamily.ru</a></li>
-            <li>Telegram-бот: <a href="https://t.me/AdrenalinFamilyBot" class="text-white hover:underline">t.me/AdrenalinFamilyBot</a></li>
+            <li>Telegram-бот: <a href="https://t.me/Adrenalinfamilybot" class="text-white hover:underline">t.me/Adrenalinfamilybot</a></li>
           </ul>
         </div>
         <div class="space-y-2">
+          <p class="text-gray-400">Статьи</p>
+          <ul class="space-y-2">
+            <li><a href="how-it-works.html" class="text-[var(--cyan)] hover:text-white">Как это работает?</a></li>
+            <li><a href="pricing.html" class="text-[var(--cyan)] hover:text-white">Сколько стоит?</a></li>
+            <li><a href="for-parents.html" class="text-[var(--cyan)] hover:text-white">Для родителей</a></li>
+          </ul>
+        </div>
+        
+        <div id="footer-docs" class="space-y-2">
           <p class="text-gray-400">Документы</p>
           <ul class="space-y-2">
             <li><a href="docs/oferta.html" class="text-[var(--cyan)] hover:text-white">Договор оферты</a></li>
@@ -384,7 +399,12 @@
           </ul>
         </div>
       </div>
-      <div class="mt-8 pt-6 border-t border-white/10 text-center text-gray-400">© 2025 Adrenalin Family</div>
+      <div class="mt-8 pt-6 border-t border-white/10 text-center text-gray-400">Официально от Adrenalin House ©</div>
+      <div class="mt-1 pt-1 text-center text-gray-400"> 2025 Adrenalin Family ©</div>
+      <div class="mt-3 text-[11px] sm:text-xs text-gray-500 text-center space-y-1 max-w-5xl mx-auto px-4">
+        <p>ИП Евтушенко Богдан Сергеевич — ИНН 312331783978, ОГРНИП 325310000037590</p>
+        <p>Р/с 40802810200008289367 в АО «ТБанк», К/с 30101810145250000974, БИК 044525974</p>
+      </div>
     </div>
   </footer>
 
