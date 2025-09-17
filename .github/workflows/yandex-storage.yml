@@ -1,0 +1,47 @@
+name: Deploy to Yandex Cloud Storage
+
+on:
+  push:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build static bundle
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir dist
+          rsync -a \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.vscode/' \
+            --exclude 'dist/' \
+            --exclude '*.md' \
+            --exclude '.gitignore' \
+            ./ dist/
+
+      - name: Upload to Yandex Cloud Storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YANDEX_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YANDEX_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.YANDEX_REGION || 'ru-central1' }}
+          YANDEX_BUCKET: ${{ secrets.YANDEX_BUCKET }}
+          YANDEX_ENDPOINT: ${{ secrets.YANDEX_ENDPOINT_URL }}
+        run: |
+          set -euo pipefail
+          : "${AWS_ACCESS_KEY_ID:?Missing YANDEX_ACCESS_KEY_ID secret}"
+          : "${AWS_SECRET_ACCESS_KEY:?Missing YANDEX_SECRET_ACCESS_KEY secret}"
+          : "${YANDEX_BUCKET:?Missing YANDEX_BUCKET secret}"
+
+          ENDPOINT="${YANDEX_ENDPOINT:-https://storage.yandexcloud.net}"
+          aws --version
+          aws s3 sync dist "s3://${YANDEX_BUCKET}" --endpoint-url="${ENDPOINT}" --delete --acl public-read
