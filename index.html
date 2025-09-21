@@ -28,7 +28,7 @@
 <body class="bg-[#0b0f1a] text-gray-200 antialiased selection:bg-pink-300/20 selection:text-white">
 
   <!-- Шапка -->
-  <header class="sticky top-0 z-30 border-b border-white/10 bg-[#0b0f1a]/70 backdrop-blur supports-[backdrop-filter]:bg-[#0b0f1a]/60">
+  <!-- <header class="hidden md:block sticky top-0 z-30 border-b border-white/10 bg-[#0b0f1a]/70 backdrop-blur supports-[backdrop-filter]:bg-[#0b0f1a]/60">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="./" class="flex items-center gap-2 group" aria-label="Adrenalin Family">
         <img src="assets/logo.webp" alt="Adrenalin Family" class="h-9 w-auto object-contain drop-shadow-sm" loading="eager" fetchpriority="high">
@@ -38,10 +38,10 @@
         <a href="https://t.me/Adrenalinfamilybot" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Приложение</a>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <!-- Изображение head.jpg -->
-  <section class="relative overflow-hidden">
+  <!-- <section class="relative overflow-hidden">
     <div class="w-full flex justify-center items-start">
       <img 
         src="assets/img/head1.webp" 
@@ -49,23 +49,105 @@
         class="max-h-[500px] w-auto object-contain rounded-2xl"
       >
     </div>
-  </section>
+  </section> -->
 
   <!-- Главный экран -->
-  <section class="relative overflow-hidden ">
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--bg1)] via-[var(--bg2)] to-[var(--bg1)]"></div>
-    <div class="pointer-events-none absolute inset-0 -z-10">
-      <div class="absolute left-1/2 top-[-6rem] h-72 w-72 -translate-x-1/2 rounded-full bg-[var(--pink)]/20 blur-3xl"></div>
-      <div class="absolute left-[8%] bottom-[-4rem] h-56 w-56 rounded-full bg-[var(--cyan)]/20 blur-2xl"></div>
-      <div class="absolute right-[10%] top-[20%] h-40 w-40 rounded-full bg-[var(--pink)]/15 blur-2xl"></div>
-    </div>
-    <div class="max-w-6xl mx-auto px-4 py-10 text-center font-bold">
-      <!-- <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] neon">Adrenalin Family</span>
-      </h1> -->
-      <p class="text-xl md:text-2xl text-white mb-8">Это официальное приложение от Adrenalin House <br> В нем вы станете частью нашей большой семьи 🫶</p>
-      <div class="flex items-center justify-center gap-3">
-        <a href="https://t.me/Adrenalinfamilybot" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-md text-white bg-gradient-to-r from-[var(--pink)] to-[var(--cyan)] shadow-sm hover:shadow-md transition">Вступить</a>
+  <section class="relative overflow-hidden h-screen">
+    <!-- <div class="absolute top-4 left-4 z-50">
+      <div class="bg-black/80 text-white px-3 py-2 rounded-lg text-sm font-mono backdrop-blur-sm">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-red-500" id="size-indicator"></div>
+          <span id="breakpoint-text">Loading...</span>
+        </div>
+        <div class="text-xs mt-1 opacity-75" id="screen-size"></div>
+      </div>
+    </div> -->
+    
+    <script>
+      function updateSizeIndicator() {
+        const width = window.innerWidth;
+        const indicator = document.getElementById('size-indicator');
+        const breakpointText = document.getElementById('breakpoint-text');
+        const screenSize = document.getElementById('screen-size');
+        
+        let breakpoint, color;
+        
+        if (width < 640) {
+          breakpoint = 'XS';
+          color = 'bg-red-500';
+        } else if (width < 768) {
+          breakpoint = 'SM';
+          color = 'bg-orange-500';
+        } else if (width < 1024) {
+          breakpoint = 'MD';
+          color = 'bg-yellow-500';
+        } else if (width < 1280) {
+          breakpoint = 'LG';
+          color = 'bg-green-500';
+        } else if (width < 1536) {
+          breakpoint = 'XL';
+          color = 'bg-blue-500';
+        } else {
+          breakpoint = '2XL';
+          color = 'bg-purple-500';
+        }
+        
+        indicator.className = `w-3 h-3 rounded-full ${color}`;
+        breakpointText.textContent = breakpoint;
+        screenSize.textContent = `${width}px`;
+      }
+      
+      updateSizeIndicator();
+      window.addEventListener('resize', updateSizeIndicator);
+    </script>
+    <!-- Фоновое изображение для маленьких и средних экранов -->
+    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat md:hidden" style="background-image: url('assets/img/bgm.jpg'); background-position: center bottom;"></div>
+    <!-- Фоновое изображение для больших экранов -->
+    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat hidden md:block" style="background-image: url('assets/img/bg.jpg'); background-position: center bottom;"></div>
+   
+    <div class="max-w-6xl mx-auto px-4 h-full flex flex-col justify-between items-center text-center">
+      <!-- Главный заголовок -->
+      <div class="flex flex-col items-center pt-20 sm:pt-8 md:pt-16 lg:pt-8 xl:pt-4">
+      <div class="mb-12 lg:mb-8">
+        <img src="assets/img/logoAF_cropped.webp" alt="ADRENALIN FAMILY" class="h-32 md:h-40 w-auto mx-auto">
+      </div>
+      
+      <!-- Подзаголовок -->
+      <p class="text-xl md:text-2xl text-white mb-8 font-medium lg:mb-4">ADRENALIN FAMILY – твой дом в Telegram</p>
+      
+      <!-- Список возможностей -->
+      <div class="flex flex-row items-center gap-3 mb-12 text-white text-lg">
+        <div class="flex items-center gap-1">
+          <div class="w-5 h-5 flex items-center justify-center">
+            <img src="assets/img/task.webp" alt="Квесты" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1026%) hue-rotate(179deg) brightness(101%) contrast(101%);">
+          </div>
+          <span>Квесты</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <div class="w-5 h-5 flex items-center justify-center">
+            <img src="assets/img/prise.webp" alt="Подарки" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1026%) hue-rotate(179deg) brightness(101%) contrast(101%);">
+          </div>
+          <span>Подарки</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <div class="w-5 h-5 flex items-center justify-center">
+            <img src="assets/img/ruff.webp" alt="Розыгрыши" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1026%) hue-rotate(179deg) brightness(101%) contrast(101%);">
+          </div>
+          <span>Розыгрыши</span>
+        </div>
+      </div>
+      </div>
+      
+      <!-- Кнопка -->
+      <div class="flex items-center justify-center pb-28 sm:pb-36 md:pb-16">
+        <a href="https://t.me/Adrenalinfamilybot" target="_blank" 
+        rel="noopener noreferrer" 
+        class="pl-8 pr-6 py-4 rounded-2xl text-white 
+        bg-[#ad2fb7]
+         shadow-lg hover:shadow-xl transition-all duration-300 
+         transform hover:scale-105 font-bold text-xl">
+              ВСТУПИТЬ⚡
+        </a>
       </div>
     </div>
   </section>
@@ -95,7 +177,7 @@
                 
              
              <!-- Социальные сети -->
-             <div class="flex justify-center lg:justify-start gap-2 sm:gap-3 md:gap-4">
+             <div class="flex justify-center lg:justify-start gap-0 sm:gap-3 md:gap-4">
                <a href="https://instagram.com/dance_adrenalin" target="_blank" rel="nofollow noopener" aria-label="Instagram" class="p-2 transition-all duration-300 hover:scale-110">
                 <svg class="t-sociallinks__svg" role="presentation" width="50px" height="50px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M66.9644 10H33.04C20.3227 10 10 20.3227 10 32.9573V67.1167C10 79.6816 20.3227 90 33.04 90H66.96C79.6816 90 90 79.6816 90 67.0384V32.9616C90.0044 20.3227 79.6816 10 66.9644 10ZM29.2 50.0022C29.2 38.5083 38.5257 29.2 50.0022 29.2C61.4786 29.2 70.8 38.5083 70.8 50.0022C70.8 61.4961 61.4743 70.8 50.0022 70.8C38.5257 70.8 29.2 61.4961 29.2 50.0022ZM72.8854 31.2027C70.2079 31.2027 68.0789 29.0824 68.0789 26.4049C68.0789 23.7273 70.2035 21.6027 72.8854 21.6027C75.5586 21.6027 77.6833 23.7273 77.6833 26.4049C77.6833 29.0824 75.5586 31.2027 72.8854 31.2027Z" fill="#ffffff"></path> 
@@ -145,22 +227,37 @@
 
   <!-- Как это работает -->
   <section id="app" class="py-16 max-w-6xl mx-auto px-4">
-    <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar sm:grid sm:grid-cols-2 md:grid-cols-5 sm:overflow-visible">
-      <figure class="flex-shrink-0 w-3/4 sm:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+    <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-5 md:grid-rows-2 md:gap-4 md:overflow-visible">
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/loading.webp" alt="Скриншот 1" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 sm:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/house.webp" alt="Скриншот 2" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>         
-      <figure class="flex-shrink-0 w-3/4 sm:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/shop.webp" alt="Скриншот 3" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 sm:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/raffles.webp" alt="Скриншот 4" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 sm:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/tasks.webp" alt="Скриншот 5" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
+        <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <img src="./assets/img/screen1.webp" alt="Скриншот 6" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
+      </figure>
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <img src="./assets/img/screen2.webp" alt="Скриншот 7" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
+      </figure>
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <img src="./assets/img/screen3.webp" alt="Скриншот 8" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
+      </figure>
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <img src="./assets/img/screen4.webp" alt="Скриншот 9" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
+      </figure>
+      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <img src="./assets/img/screen5.webp" alt="Скриншот 10" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
+      </figure>      
     </div>
   </section>
 
@@ -182,7 +279,7 @@
           <span>Отменить можно в приложении: Профиль → Настройки → Управление подпиской.</span>
         </li>
       </ul>
-      <div class="flex justify-center items-center gap-8">
+      <div class="flex justify-center items-center gap-4">
         <img src="./assets/img/payments_logo/sbp.svg" alt="SBP" class="h-8 opacity-90 hover:opacity-100 transition">
         <img src="./assets/img/payments_logo/SBER.ME-10de1f5f.png" alt="Sber" class="h-8 opacity-90 hover:opacity-100 transition">
         <img src="./assets/img/payments_logo/t-bank.svg" alt="T-Bank" class="h-8 opacity-90 hover:opacity-100 transition">
