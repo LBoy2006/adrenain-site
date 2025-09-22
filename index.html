@@ -20,9 +20,89 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
     .neon { text-shadow: 0 0 8px rgba(255,60,166,.35), 0 0 18px rgba(46,201,255,.25); }
-    /* Прячем скроллбар у карусели */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* Стилизованный горизонтальный скроллбар для карусели */
+    .carousel-scrollbar::-webkit-scrollbar {
+      height: 8px;
+    }
+    .carousel-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    .carousel-scrollbar::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #0b0f1a, #2ec9ff);
+      border-radius: 4px;
+    }
+    .carousel-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #0b0f1a, #1eb8ff);
+    }
+    .carousel-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: #0b0f1a #12172a;
+    }
+    /* Скрываем скроллбар на мобильных устройствах */
+    @media (max-width: 768px) {
+      .carousel-scrollbar::-webkit-scrollbar { display: none; }
+      .carousel-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    }
+    /* Стили для стрелочек карусели */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      background: rgba(11, 15, 26, 0.8);
+      border: 2px solid #0b0f1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+    .carousel-arrow:hover {
+      background: rgba(11, 15, 26, 0.95);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .carousel-arrow svg {
+      width: 24px;
+      height: 24px;
+      fill: #2ec9ff;
+      transition: fill 0.3s ease;
+    }
+    .carousel-arrow:hover svg {
+      fill: #ffffff;
+    }
+    .carousel-container {
+      position: relative;
+    }
+    .carousel-arrow-left {
+      left: 10px;
+    }
+    .carousel-arrow-right {
+      right: 10px;
+    }
+    /* Скрываем стрелочки на мобильных устройствах */
+    @media (max-width: 768px) {
+      .carousel-arrow {
+        display: none;
+      }
+    }
+    /* Смещение фонового изображения на XL экранах */
+    @media (min-width: 1280px) and (max-width: 1535px) {
+      .xl-bg-shift {
+        background-position: center calc(100% - 10%) !important;
+      }
+    }
+    /* Смещение фонового изображения на 2XL экранах */
+    @media (min-width: 1536px) {
+      .xl-bg-shift {
+        background-position: center calc(100% - 30%) !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#0b0f1a] text-gray-200 antialiased selection:bg-pink-300/20 selection:text-white">
@@ -53,6 +133,7 @@
 
   <!-- Главный экран -->
   <section class="relative overflow-hidden h-screen">
+    <!-- индикатор размера экрана -->
     <!-- <div class="absolute top-4 left-4 z-50">
       <div class="bg-black/80 text-white px-3 py-2 rounded-lg text-sm font-mono backdrop-blur-sm">
         <div class="flex items-center gap-2">
@@ -101,19 +182,23 @@
       window.addEventListener('resize', updateSizeIndicator);
     </script>
     <!-- Фоновое изображение для маленьких и средних экранов -->
-    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat md:hidden" style="background-image: url('assets/img/bgm.jpg'); background-position: center bottom;"></div>
+    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat sm:hidden" style="background-image: url('assets/img/bgm.jpg'); background-position: center bottom;"></div>
     <!-- Фоновое изображение для больших экранов -->
-    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat hidden md:block" style="background-image: url('assets/img/bg.jpg'); background-position: center bottom;"></div>
+    <div class="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat hidden sm:block xl-bg-shift" 
+    style="background-image: url('assets/img/bg.jpg'); background-position: center bottom;"></div>
    
     <div class="max-w-6xl mx-auto px-4 h-full flex flex-col justify-between items-center text-center">
       <!-- Главный заголовок -->
-      <div class="flex flex-col items-center pt-20 sm:pt-8 md:pt-16 lg:pt-8 xl:pt-4">
-      <div class="mb-12 lg:mb-8">
+      <div class="flex flex-col items-center pt-10 sm:pt-8 md:pt-16 lg:pt-8 xl:pt-4">
+      <div class="mb-12 lg:mb-8 xl:mb-4">
         <img src="assets/img/logoAF_cropped.webp" alt="ADRENALIN FAMILY" class="h-32 md:h-40 w-auto mx-auto">
       </div>
       
       <!-- Подзаголовок -->
-      <p class="text-xl md:text-2xl text-white mb-8 font-medium lg:mb-4">ADRENALIN FAMILY – твой дом в Telegram</p>
+      <p class="text-xl md:text-2xl text-white mb-8 font-medium lg:mb-4">
+        Adrenalin Family - твоя онлайн<br class="lg:hidden">
+        семья в приложении в Телеграм
+      </p>
       
       <!-- Список возможностей -->
       <div class="flex flex-row items-center gap-3 mb-12 text-white text-lg">
@@ -139,13 +224,13 @@
       </div>
       
       <!-- Кнопка -->
-      <div class="flex items-center justify-center pb-28 sm:pb-36 md:pb-16">
+      <div class="flex items-center justify-center pb-44 sm:pb-24 md:pb-16 xl:pb-10 2xl:pb-4">
         <a href="https://t.me/Adrenalinfamilybot" target="_blank" 
         rel="noopener noreferrer" 
-        class="pl-8 pr-6 py-4 rounded-2xl text-white 
+        class="pl-7 pr-5 py-3 rounded-2xl text-white 
         bg-[#ad2fb7]
          shadow-lg hover:shadow-xl transition-all duration-300 
-         transform hover:scale-105 font-bold text-xl">
+         transform hover:scale-105 font-bold ">
               ВСТУПИТЬ⚡
         </a>
       </div>
@@ -226,38 +311,54 @@
   </section>
 
   <!-- Как это работает -->
-  <section id="app" class="py-16 max-w-6xl mx-auto px-4">
-    <div class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar md:grid md:grid-cols-5 md:grid-rows-2 md:gap-4 md:overflow-visible">
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+  <section id="app" class="py-16 w-full mx-auto px-4">
+    <div class="carousel-container">
+      <!-- Стрелка влево -->
+      <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel(-1)">
+        <svg viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      
+      <!-- Стрелка вправо -->
+      <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel(1)">
+        <svg viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+      
+      <div class="flex gap-6 overflow-x-auto overflow-y-hidden snap-x snap-mandatory max-h-[80vh] carousel-scrollbar" id="carousel">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/loading.webp" alt="Скриншот 1" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/house.webp" alt="Скриншот 2" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>         
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/shop.webp" alt="Скриншот 3" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/raffles.webp" alt="Скриншот 4" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/tasks.webp" alt="Скриншот 5" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-        <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+        <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/screen1.webp" alt="Скриншот 6" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/screen2.webp" alt="Скриншот 7" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/screen3.webp" alt="Скриншот 8" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/screen4.webp" alt="Скриншот 9" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>
-      <figure class="flex-shrink-0 w-3/4 md:w-auto snap-center group rounded-xl shadow-sm hover:shadow-md">
+      <figure class="flex-shrink-0 w-60 snap-center group rounded-xl shadow-sm hover:shadow-md">
         <img src="./assets/img/screen5.webp" alt="Скриншот 10" class="rounded-lg w-full object-cover group-hover:scale-[1.02] transition">
       </figure>      
+      </div>
     </div>
   </section>
 
@@ -340,6 +441,36 @@
   <div style="display: none; visibility: hidden; position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">
     adrenalin family, adrenaline family, адреналин фэмили, адреналин фемили, адреналин фамили, adrenallin family, adrinalin family, adrenalin familly, adrenalin familyy, adren fam, ad fam, afamily, adren famy, адреналин хаус, adrenaline house, адреналин хаус фэмили, adrenalin house, adrenalinfamily, adrenalfamily, adrenalin family бот, adrenalin family официальный сайт, adrenalin family вход, adrenalin family телеграм, adrenalin family t.me, adrenalin family подписка, adrenalin family цена, adrenalin family сколько стоит, adrenalin family оплата, adrenalin family задания, adrenalin family энергия, adrenalin family подарки, adrenalin family розыгрыши, adrenalin family отзывы, adrenalin family развод, adrenalin family мошенники
   </div>
+
+  <script>
+    function scrollCarousel(direction) {
+      const carousel = document.getElementById('carousel');
+      const scrollAmount = 280; // Ширина элемента + gap (240px + 24px)
+      
+      if (direction === 1) {
+        // Прокрутка вправо
+        carousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      } else {
+        // Прокрутка влево
+        carousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Добавляем обработчики клавиш для стрелочек
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') {
+        scrollCarousel(-1);
+      } else if (e.key === 'ArrowRight') {
+        scrollCarousel(1);
+      }
+    });
+  </script>
 
 </body>
 </html>
